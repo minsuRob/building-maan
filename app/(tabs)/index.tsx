@@ -1,98 +1,334 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  SafeAreaView,
+  Platform,
+  useWindowDimensions,
+} from "react-native";
+import { Image } from "expo-image";
+import {
+  Feather,
+  MaterialCommunityIcons,
+  FontAwesome5,
+} from "@expo/vector-icons";
+import { StatusBar } from "expo-status-bar";
 
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
+const CATEGORIES = [
+  { id: "1", name: "Mijang", icon: "trowel", family: "MaterialCommunityIcons" },
+  {
+    id: "2",
+    name: "Brickwork",
+    icon: "wall",
+    family: "MaterialCommunityIcons",
+  },
+  {
+    id: "3",
+    name: "Electrician",
+    icon: "power-plug",
+    family: "MaterialCommunityIcons",
+  },
+  { id: "4", name: "Labor", icon: "users", family: "Feather" },
+  { id: "5", name: "Painter", icon: "paint-roller", family: "FontAwesome5" },
+  {
+    id: "6",
+    name: "Carpentry",
+    icon: "hammer",
+    family: "MaterialCommunityIcons",
+  },
+  { id: "7", name: "Plumbing", icon: "pipe", family: "MaterialCommunityIcons" },
+  {
+    id: "8",
+    name: "Tiling",
+    icon: "view-grid",
+    family: "MaterialCommunityIcons",
+  },
+];
 
 export default function HomeScreen() {
-  return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
+  const { width } = useWindowDimensions();
+  const [searchQuery, setSearchQuery] = useState("");
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+  // Calculate max width for desktop/tablet
+  const isLargeScreen = width > 768;
+  const contentMaxWidth = isLargeScreen ? 600 : "100%";
+
+  const renderIcon = (
+    family: string,
+    name: string,
+    color: string,
+    size: number,
+  ) => {
+    switch (family) {
+      case "MaterialCommunityIcons":
+        return (
+          <MaterialCommunityIcons
+            name={name as any}
+            size={size}
+            color={color}
+          />
+        );
+      case "FontAwesome5":
+        return <FontAwesome5 name={name as any} size={size} color={color} />;
+      case "Feather":
+      default:
+        return <Feather name={name as any} size={size} color={color} />;
+    }
+  };
+
+  return (
+    <SafeAreaView style={styles.safeArea}>
+      <StatusBar style="dark" />
+
+      {/* Centered container for desktop support */}
+      <View style={styles.rootContainer}>
+        <View style={[styles.mainContainer, { maxWidth: contentMaxWidth }]}>
+          {/* Header */}
+          <View style={styles.header}>
+            <TouchableOpacity style={styles.iconButton}>
+              <Feather name="menu" size={24} color="#1f2937" />
+            </TouchableOpacity>
+
+            <Text style={styles.logoText}>CONSTRUCTPRO</Text>
+
+            <TouchableOpacity style={styles.profileButton}>
+              <Image
+                source={{ uri: "https://i.pravatar.cc/150?img=11" }}
+                style={styles.profileImage}
+                contentFit="cover"
+              />
+            </TouchableOpacity>
+          </View>
+
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={styles.scrollContent}
+          >
+            {/* Search & Location Section */}
+            <View style={styles.searchSection}>
+              {/* Location Selector */}
+              <TouchableOpacity style={styles.locationSelector}>
+                <View style={styles.locationLeft}>
+                  <Feather name="map-pin" size={20} color="#b45309" />
+                  <Text style={styles.locationText}>Gangnam-gu, Seoul</Text>
+                </View>
+                <Feather name="chevron-down" size={20} color="#9ca3af" />
+              </TouchableOpacity>
+
+              {/* Search Bar */}
+              <View style={styles.searchBar}>
+                <Feather name="search" size={20} color="#9ca3af" />
+                <TextInput
+                  style={styles.searchInput}
+                  placeholder="Search skilled trades..."
+                  placeholderTextColor="#9ca3af"
+                  value={searchQuery}
+                  onChangeText={setSearchQuery}
+                />
+              </View>
+            </View>
+
+            {/* Quick Categories */}
+            <View style={styles.categoriesSection}>
+              <View style={styles.categoriesHeader}>
+                <Text style={styles.categoriesTitle}>Quick Categories</Text>
+                <TouchableOpacity>
+                  <Text style={styles.viewAllText}>View All</Text>
+                </TouchableOpacity>
+              </View>
+
+              <View style={styles.categoriesGrid}>
+                {CATEGORIES.map((category) => (
+                  <TouchableOpacity
+                    key={category.id}
+                    style={styles.categoryItem}
+                  >
+                    <View style={styles.categoryIconContainer}>
+                      {renderIcon(
+                        category.family,
+                        category.icon,
+                        "#92400e",
+                        28,
+                      )}
+                    </View>
+                    <Text style={styles.categoryName}>{category.name}</Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+            </View>
+          </ScrollView>
+        </View>
+      </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  safeArea: {
+    flex: 1,
+    backgroundColor: "#f9fafb",
   },
-  stepContainer: {
-    gap: 8,
+  rootContainer: {
+    flex: 1,
+    alignItems: "center",
+    backgroundColor: Platform.OS === "web" ? "#1f2937" : "#f9fafb", // Dark background outside on web
+  },
+  mainContainer: {
+    flex: 1,
+    width: "100%",
+    backgroundColor: "#f9fafb",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.1,
+    shadowRadius: 20,
+    elevation: 5,
+  },
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: 20,
+    paddingVertical: 16,
+    backgroundColor: "#ffffff",
+    borderBottomWidth: 1,
+    borderBottomColor: "#f3f4f6",
+  },
+  iconButton: {
+    padding: 8,
+    marginLeft: -8,
+  },
+  logoText: {
+    fontSize: 20,
+    fontWeight: "900",
+    color: "#111827",
+    letterSpacing: -0.5,
+  },
+  profileButton: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: "#e5e7eb",
+    overflow: "hidden",
+    borderWidth: 2,
+    borderColor: "#b45309",
+  },
+  profileImage: {
+    width: "100%",
+    height: "100%",
+  },
+  scrollContent: {
+    paddingBottom: 40,
+  },
+  searchSection: {
+    paddingHorizontal: 20,
+    paddingTop: 24,
+    paddingBottom: 16,
+    gap: 16,
+  },
+  locationSelector: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    backgroundColor: "#ffffff",
+    paddingHorizontal: 16,
+    paddingVertical: 14,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: "#e5e7eb",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
+    elevation: 2,
+  },
+  locationLeft: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+  },
+  locationText: {
+    fontSize: 16,
+    color: "#1f2937",
+    fontWeight: "500",
+  },
+  searchBar: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#ffffff",
+    paddingHorizontal: 16,
+    paddingVertical: 14,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: "#e5e7eb",
+    gap: 12,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
+    elevation: 2,
+  },
+  searchInput: {
+    flex: 1,
+    fontSize: 16,
+    color: "#1f2937",
+    padding: 0,
+  },
+  categoriesSection: {
+    paddingHorizontal: 20,
+    paddingTop: 16,
+  },
+  categoriesHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 20,
+  },
+  categoriesTitle: {
+    fontSize: 18,
+    fontWeight: "600",
+    color: "#111827",
+  },
+  viewAllText: {
+    fontSize: 14,
+    fontWeight: "500",
+    color: "#b45309",
+  },
+  categoriesGrid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    gap: 16,
+  },
+  categoryItem: {
+    width: "22%", // Roughly 4 items per row with gap
+    minWidth: 70,
+    alignItems: "center",
     marginBottom: 8,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  categoryIconContainer: {
+    width: 64,
+    height: 64,
+    backgroundColor: "#ffffff",
+    borderRadius: 16,
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 8,
+    borderWidth: 1,
+    borderColor: "#f3f4f6",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  categoryName: {
+    fontSize: 13,
+    color: "#374151",
+    fontWeight: "500",
+    textAlign: "center",
   },
 });
