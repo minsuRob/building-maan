@@ -1,0 +1,23 @@
+{
+  "header": {
+    "logo": "CONSTRUCTPRO"
+  },
+  "search": {
+    "location": "Gangnam-gu, Seoul",
+    "placeholder": "Search skilled trades..."
+  },
+  "categories": {
+    "title": "Quick Categories",
+    "view_all": "View All",
+    "items": {
+      "mijang": "Mijang",
+      "brickwork": "Brickwork",
+      "electrician": "Electrician",
+      "labor": "Labor",
+      "painter": "Painter",
+      "carpentry": "Carpentry",
+      "plumbing": "Plumbing",
+      "tiling": "Tiling"
+    }
+  }
+}

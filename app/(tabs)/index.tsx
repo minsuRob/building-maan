@@ -17,39 +17,61 @@ import {
   FontAwesome5,
 } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
+import { useTranslation } from "react-i18next";
 
 const CATEGORIES = [
-  { id: "1", name: "Mijang", icon: "trowel", family: "MaterialCommunityIcons" },
+  {
+    id: "1",
+    nameKey: "categories.items.mijang",
+    icon: "trowel",
+    family: "MaterialCommunityIcons",
+  },
   {
     id: "2",
-    name: "Brickwork",
+    nameKey: "categories.items.brickwork",
     icon: "wall",
     family: "MaterialCommunityIcons",
   },
   {
     id: "3",
-    name: "Electrician",
+    nameKey: "categories.items.electrician",
     icon: "power-plug",
     family: "MaterialCommunityIcons",
   },
-  { id: "4", name: "Labor", icon: "users", family: "Feather" },
-  { id: "5", name: "Painter", icon: "paint-roller", family: "FontAwesome5" },
+  {
+    id: "4",
+    nameKey: "categories.items.labor",
+    icon: "users",
+    family: "Feather",
+  },
+  {
+    id: "5",
+    nameKey: "categories.items.painter",
+    icon: "paint-roller",
+    family: "FontAwesome5",
+  },
   {
     id: "6",
-    name: "Carpentry",
+    nameKey: "categories.items.carpentry",
     icon: "hammer",
     family: "MaterialCommunityIcons",
   },
-  { id: "7", name: "Plumbing", icon: "pipe", family: "MaterialCommunityIcons" },
+  {
+    id: "7",
+    nameKey: "categories.items.plumbing",
+    icon: "pipe",
+    family: "MaterialCommunityIcons",
+  },
   {
     id: "8",
-    name: "Tiling",
+    nameKey: "categories.items.tiling",
     icon: "view-grid",
     family: "MaterialCommunityIcons",
   },
 ];
 
 export default function HomeScreen() {
+  const { t } = useTranslation();
   const { width } = useWindowDimensions();
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -93,7 +115,7 @@ export default function HomeScreen() {
               <Feather name="menu" size={24} color="#1f2937" />
             </TouchableOpacity>
 
-            <Text style={styles.logoText}>CONSTRUCTPRO</Text>
+            <Text style={styles.logoText}>{t("header.logo")}</Text>
 
             <TouchableOpacity style={styles.profileButton}>
               <Image
@@ -114,7 +136,9 @@ export default function HomeScreen() {
               <TouchableOpacity style={styles.locationSelector}>
                 <View style={styles.locationLeft}>
                   <Feather name="map-pin" size={20} color="#b45309" />
-                  <Text style={styles.locationText}>Gangnam-gu, Seoul</Text>
+                  <Text style={styles.locationText}>
+                    {t("search.location")}
+                  </Text>
                 </View>
                 <Feather name="chevron-down" size={20} color="#9ca3af" />
               </TouchableOpacity>
@@ -124,7 +148,7 @@ export default function HomeScreen() {
                 <Feather name="search" size={20} color="#9ca3af" />
                 <TextInput
                   style={styles.searchInput}
-                  placeholder="Search skilled trades..."
+                  placeholder={t("search.placeholder")}
                   placeholderTextColor="#9ca3af"
                   value={searchQuery}
                   onChangeText={setSearchQuery}
@@ -135,9 +159,13 @@ export default function HomeScreen() {
             {/* Quick Categories */}
             <View style={styles.categoriesSection}>
               <View style={styles.categoriesHeader}>
-                <Text style={styles.categoriesTitle}>Quick Categories</Text>
+                <Text style={styles.categoriesTitle}>
+                  {t("categories.title")}
+                </Text>
                 <TouchableOpacity>
-                  <Text style={styles.viewAllText}>View All</Text>
+                  <Text style={styles.viewAllText}>
+                    {t("categories.view_all")}
+                  </Text>
                 </TouchableOpacity>
               </View>
 
@@ -155,7 +183,9 @@ export default function HomeScreen() {
                         28,
                       )}
                     </View>
-                    <Text style={styles.categoryName}>{category.name}</Text>
+                    <Text style={styles.categoryName}>
+                      {t(category.nameKey)}
+                    </Text>
                   </TouchableOpacity>
                 ))}
               </View>

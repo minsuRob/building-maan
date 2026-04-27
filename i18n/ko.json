@@ -1,0 +1,23 @@
+{
+  "header": {
+    "logo": "CONSTRUCTPRO"
+  },
+  "search": {
+    "location": "서울 강남구",
+    "placeholder": "숙련된 기술자 검색..."
+  },
+  "categories": {
+    "title": "빠른 카테고리",
+    "view_all": "전체 보기",
+    "items": {
+      "mijang": "미장",
+      "brickwork": "조적",
+      "electrician": "전기공",
+      "labor": "인력",
+      "painter": "도장",
+      "carpentry": "목공",
+      "plumbing": "설비",
+      "tiling": "타일"
+    }
+  }
+}
