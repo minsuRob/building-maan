@@ -19,5 +19,66 @@
       "plumbing": "Plumbing",
       "tiling": "Tiling"
     }
+  },
+  "hiring": {
+    "urgent_title": "Urgent Hiring",
+    "apply_now": "Apply Now",
+    "krw_day": "KRW / DAY",
+    "starts": "Starts",
+    "confirm_application": "Confirm Application",
+    "urgent_badge": "URGENT"
+  },
+  "job_detail": {
+    "required_skills": "Required Skills",
+    "description": "Job Description",
+    "daily_rate": "DAILY RATE",
+    "payment_terms": "PAYMENT",
+    "next_day": "Next Day",
+    "date": "DATE",
+    "shift": "SHIFT"
+  },
+  "job_search": {
+    "title": "Find Jobs",
+    "filter_all": "All",
+    "filter_distance": "Distance",
+    "filter_pay": "High Pay",
+    "filter_latest": "Latest",
+    "distance": "km away",
+    "recommended": "Recommended",
+    "near_me": "Jobs Near Me",
+    "day_shift": "Day",
+    "night_shift": "Night",
+    "long_term": "Long-term",
+    "short_term": "Short-term"
+  },
+  "tasks": {
+    "pending_jobs": "PENDING JOBS",
+    "completed_today": "COMPLETED TODAY",
+    "total_settlement": "TOTAL SETTLEMENT",
+    "upcoming_timeline": "Upcoming Timeline",
+    "full_schedule": "Full Schedule",
+    "check_in": "CHECK-IN",
+    "check_out": "CHECK-OUT",
+    "site_attendance": "Site Attendance",
+    "scan_qr": "Scan the site QR code to automatically check-in for your shift."
+  },
+  "workers": {
+    "verified_title": "Verified Workers",
+    "view_portfolio": "View Portfolio",
+    "hire_now": "Hire Now",
+    "experience": "EXPERIENCE",
+    "status": "STATUS",
+    "available": "Available",
+    "on_job": "On Job",
+    "years": "Years",
+    "filter_craft": "Craft",
+    "filter_exp": "Experience",
+    "filter_rating": "Rating"
+  },
+  "tabs": {
+    "home": "HOME",
+    "jobs": "JOBS",
+    "workers": "WORKERS",
+    "tasks": "TASKS"
   }
 }

@@ -70,12 +70,38 @@ const CATEGORIES = [
   },
 ];
 
+const HIRING_DATA = [
+  {
+    id: "1",
+    tag: "MIJANG / PLASTERING",
+    title: "Wall Finishing - Luxury Condo",
+    price: "220,000",
+    location: "Sinsa-dong",
+    time: "07:00",
+  },
+  {
+    id: "2",
+    tag: "GENERAL LABOR",
+    title: "Site Clearing & Setup",
+    price: "160,000",
+    location: "Nonhyeon-dong",
+    time: "08:00",
+  },
+  {
+    id: "3",
+    tag: "ELECTRICIAN",
+    title: "Circuit Testing Phase 2",
+    price: "250,000",
+    location: "Cheongdam-dong",
+    time: "07:30",
+  },
+];
+
 export default function HomeScreen() {
   const { t } = useTranslation();
   const { width } = useWindowDimensions();
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Calculate max width for desktop/tablet
   const isLargeScreen = width > 768;
   const contentMaxWidth = isLargeScreen ? 600 : "100%";
 
@@ -106,7 +132,6 @@ export default function HomeScreen() {
     <SafeAreaView style={styles.safeArea}>
       <StatusBar style="dark" />
 
-      {/* Centered container for desktop support */}
       <View style={styles.rootContainer}>
         <View style={[styles.mainContainer, { maxWidth: contentMaxWidth }]}>
           {/* Header */}
@@ -132,7 +157,6 @@ export default function HomeScreen() {
           >
             {/* Search & Location Section */}
             <View style={styles.searchSection}>
-              {/* Location Selector */}
               <TouchableOpacity style={styles.locationSelector}>
                 <View style={styles.locationLeft}>
                   <Feather name="map-pin" size={20} color="#b45309" />
@@ -143,7 +167,6 @@ export default function HomeScreen() {
                 <Feather name="chevron-down" size={20} color="#9ca3af" />
               </TouchableOpacity>
 
-              {/* Search Bar */}
               <View style={styles.searchBar}>
                 <Feather name="search" size={20} color="#9ca3af" />
                 <TextInput
@@ -190,7 +213,63 @@ export default function HomeScreen() {
                 ))}
               </View>
             </View>
+
+            {/* Urgent Hiring Section */}
+            <View style={styles.hiringSection}>
+              <View style={styles.hiringHeader}>
+                <MaterialCommunityIcons
+                  name="star-four-points"
+                  size={20}
+                  color="#b45309"
+                />
+                <Text style={styles.hiringTitle}>
+                  {t("hiring.urgent_title")}
+                </Text>
+              </View>
+
+              {HIRING_DATA.map((item) => (
+                <View key={item.id} style={styles.hiringCard}>
+                  <View style={styles.cardTopRow}>
+                    <View style={styles.tagBadge}>
+                      <Text style={styles.tagText}>{item.tag}</Text>
+                    </View>
+                    <View style={styles.priceContainer}>
+                      <Text style={styles.priceValue}>{item.price}</Text>
+                      <Text style={styles.priceUnit}>
+                        {t("hiring.krw_day")}
+                      </Text>
+                    </View>
+                  </View>
+
+                  <Text style={styles.jobTitle}>{item.title}</Text>
+
+                  <View style={styles.infoRow}>
+                    <View style={styles.infoItem}>
+                      <Feather name="map-pin" size={14} color="#6b7280" />
+                      <Text style={styles.infoText}>{item.location}</Text>
+                    </View>
+                    <View style={styles.infoItem}>
+                      <Feather name="clock" size={14} color="#6b7280" />
+                      <Text style={styles.infoText}>
+                        {t("hiring.starts")} {item.time}
+                      </Text>
+                    </View>
+                  </View>
+
+                  <TouchableOpacity style={styles.applyButton}>
+                    <Text style={styles.applyButtonText}>
+                      {t("hiring.apply_now")}
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              ))}
+            </View>
           </ScrollView>
+
+          {/* Floating Action Button */}
+          <TouchableOpacity style={styles.fab}>
+            <Feather name="plus" size={28} color="#ffffff" />
+          </TouchableOpacity>
         </View>
       </View>
     </SafeAreaView>
@@ -205,17 +284,13 @@ const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: Platform.OS === "web" ? "#1f2937" : "#f9fafb", // Dark background outside on web
+    backgroundColor: Platform.OS === "web" ? "#1f2937" : "#f9fafb",
   },
   mainContainer: {
     flex: 1,
     width: "100%",
     backgroundColor: "#f9fafb",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.1,
-    shadowRadius: 20,
-    elevation: 5,
+    position: "relative",
   },
   header: {
     flexDirection: "row",
@@ -251,7 +326,7 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   scrollContent: {
-    paddingBottom: 40,
+    paddingBottom: 100,
   },
   searchSection: {
     paddingHorizontal: 20,
@@ -269,11 +344,6 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     borderWidth: 1,
     borderColor: "#e5e7eb",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.05,
-    shadowRadius: 2,
-    elevation: 2,
   },
   locationLeft: {
     flexDirection: "row",
@@ -295,11 +365,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#e5e7eb",
     gap: 12,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.05,
-    shadowRadius: 2,
-    elevation: 2,
   },
   searchInput: {
     flex: 1,
@@ -334,7 +399,7 @@ const styles = StyleSheet.create({
     gap: 16,
   },
   categoryItem: {
-    width: "22%", // Roughly 4 items per row with gap
+    width: "22%",
     minWidth: 70,
     alignItems: "center",
     marginBottom: 8,
@@ -360,5 +425,111 @@ const styles = StyleSheet.create({
     color: "#374151",
     fontWeight: "500",
     textAlign: "center",
+  },
+  hiringSection: {
+    paddingHorizontal: 20,
+    paddingTop: 32,
+  },
+  hiringHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+    marginBottom: 16,
+  },
+  hiringTitle: {
+    fontSize: 18,
+    fontWeight: "600",
+    color: "#111827",
+  },
+  hiringCard: {
+    backgroundColor: "#ffffff",
+    borderRadius: 16,
+    padding: 16,
+    marginBottom: 16,
+    borderWidth: 1,
+    borderColor: "#e5e7eb",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 8,
+    elevation: 3,
+  },
+  cardTopRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+    marginBottom: 12,
+  },
+  tagBadge: {
+    backgroundColor: "#1f2937",
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 4,
+  },
+  tagText: {
+    color: "#ffffff",
+    fontSize: 10,
+    fontWeight: "700",
+  },
+  priceContainer: {
+    alignItems: "flex-end",
+  },
+  priceValue: {
+    fontSize: 18,
+    fontWeight: "700",
+    color: "#b45309",
+  },
+  priceUnit: {
+    fontSize: 10,
+    color: "#9ca3af",
+    fontWeight: "600",
+  },
+  jobTitle: {
+    fontSize: 18,
+    fontWeight: "700",
+    color: "#1f2937",
+    marginBottom: 12,
+  },
+  infoRow: {
+    flexDirection: "row",
+    gap: 16,
+    marginBottom: 20,
+  },
+  infoItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+  },
+  infoText: {
+    fontSize: 14,
+    color: "#6b7280",
+    fontWeight: "500",
+  },
+  applyButton: {
+    backgroundColor: "#ed8936",
+    paddingVertical: 14,
+    borderRadius: 8,
+    alignItems: "center",
+  },
+  applyButtonText: {
+    color: "#ffffff",
+    fontSize: 16,
+    fontWeight: "700",
+  },
+  fab: {
+    position: "absolute",
+    right: 20,
+    bottom: 20,
+    width: 56,
+    height: 56,
+    borderRadius: 16,
+    backgroundColor: "#111827",
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 8,
   },
 });

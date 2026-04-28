@@ -19,5 +19,66 @@
       "plumbing": "설비",
       "tiling": "타일"
     }
+  },
+  "hiring": {
+    "urgent_title": "긴급 채용",
+    "apply_now": "지금 지원하기",
+    "krw_day": "원 / 일",
+    "starts": "시작",
+    "confirm_application": "지원 확정하기",
+    "urgent_badge": "긴급"
+  },
+  "job_detail": {
+    "required_skills": "필요 기술",
+    "description": "업무 상세",
+    "daily_rate": "일급",
+    "payment_terms": "지급",
+    "next_day": "익일 지급",
+    "date": "날짜",
+    "shift": "교대"
+  },
+  "job_search": {
+    "title": "공고 찾기",
+    "filter_all": "전체",
+    "filter_distance": "거리순",
+    "filter_pay": "급여순",
+    "filter_latest": "최신순",
+    "distance": "km 이내",
+    "recommended": "추천 공고",
+    "near_me": "내 주변 현장",
+    "day_shift": "주간",
+    "night_shift": "야간",
+    "long_term": "장기",
+    "short_term": "단기"
+  },
+  "tasks": {
+    "pending_jobs": "대기 중인 업무",
+    "completed_today": "오늘 완료",
+    "total_settlement": "총 정산 금액",
+    "upcoming_timeline": "예정된 일정",
+    "full_schedule": "전체 일정",
+    "check_in": "체크인",
+    "check_out": "체크아웃",
+    "site_attendance": "현장 출석",
+    "scan_qr": "시작하려면 현장 QR 코드를 스캔하세요."
+  },
+  "workers": {
+    "verified_title": "인증된 기술자",
+    "view_portfolio": "포트폴리오",
+    "hire_now": "지금 채용",
+    "experience": "경력",
+    "status": "상태",
+    "available": "가능",
+    "on_job": "업무 중",
+    "years": "년",
+    "filter_craft": "직종",
+    "filter_exp": "경력",
+    "filter_rating": "별점"
+  },
+  "tabs": {
+    "home": "홈",
+    "jobs": "채용",
+    "workers": "기술자",
+    "tasks": "현황"
   }
 }
